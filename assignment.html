@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Assignment</title>
+    <style type="text/css">
+    .text-center{
+        text-align: center;
+    }
+        @media only screen and (min-width: 768px) {
+            #container{
+            width: 960px;
+            border:2px solid #BFBFBF;
+            margin: auto;
+            height: auto;
+        }
+        .shuffleMe{
+            float:left;
+            width:242px;
+            height:150px;
+            color: #fff;
+            font-size: 3.5rem;
+            font-weight: 400;
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+        .btn
+        {
+            margin-left: 20px;
+            padding: 8px 43px;
+            border-radius: 5px;
+            background-color: #2b8ead;
+            border: 1px solid #2b8ead;
+            color: #fff;
+            margin-top: 20px;
+            width: 160px;
+        }
+        .m-hide{
+            display: none;
+        }
+        footer{
+            position: absolute;
+            bottom: 80px;
+            text-align: center;
+            right: 0;
+            left: 0;
+        }
+        }
+        @media only screen and (max-width: 375px) {
+            body {
+                overflow-x:hidden;
+                 } 
+        .m-d-hide{
+            display: none;
+            
+        }
+        .m-hide{
+            text-align: center;
+            margin: auto;
+        }
+        .btn
+        {
+            margin-left: 20px;
+            padding: 8px 20px;
+            border-radius: 5px;
+            background-color: #2b8ead;
+            border: 1px solid #2b8ead;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        #container{           
+            width:auto;
+        }
+        .shuffleMe{
+            float:left;
+            width:98%;
+            height:30px;
+            text-align: center;
+            margin-bottom: 5px;
+            padding: 5px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }        
+        }
+    </style>
+    
+  </head>
+
+  <body>
+
+
+    <main role="main" class="container">
+        <h3 class="text-center">Shuffle and Sort</h3>
+        <div class="m-hide">
+            <button onclick="shuffle()" class="btn">
+              SHUFFLE
+            </button>       
+            <button onclick="sort()" class="btn">
+              SORT
+            </button>
+            
+          </div>
+        <div id="container">
+            <div class="shuffleMe" id="1" style="background-color: #2B8EAD;"> 1</div>
+            <div class="shuffleMe" id="2" style="background-color: #6F98A8;"> 2</div>
+            <div class="shuffleMe" id="3" style="background-color: #EFEFEF;"> 3</div>
+            <div class="shuffleMe" id="4" style="background-color: #333333;"> 4</div>
+            <div class="shuffleMe" id="5" style="background-color: #EFEFEF;">  5</div>
+            <div class="shuffleMe" id="6" style="background-color: #BFBFBF;">6</div>
+            <div class="shuffleMe" id="7" style="background-color: #2F454E;">7</div>
+            <div class="shuffleMe" id="8" style="background-color: #BFBFBF"> 8</div>
+            <div class="shuffleMe" id="9" style="background-color: #72C3DC;">9</div>
+          </div>
+          <div class="m-d-hide">
+            <button onclick="shuffle()" class="btn">
+              SHUFFLE
+            </button>
+        </div>
+        <div class="m-d-hide">
+            <button onclick="sort()" class="btn">
+              SORT
+            </button>
+            
+          </div>
+         
+    </main><!-- /.container -->
+
+<footer><div class="text-center">Shuffle and Sort By Mohamed Farooq</div></footer>
+  </body>
+  <script>
+      
+      function shuffle() {
+        var container = document.getElementById("container");
+        var elementsArray = Array.prototype.slice.call(container.getElementsByClassName('shuffleMe'));
+            elementsArray.forEach(function(element){
+            container.removeChild(element);
+        })
+        shuffleArray(elementsArray);
+        elementsArray.forEach(function(element){
+        container.appendChild(element);
+        })
+        }
+
+        function shuffleArray(array) {
+            for (var i = array.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+            return array;
+        }
+    function sort(){
+        var toSort = document.getElementById('container').children;
+toSort = Array.prototype.slice.call(toSort, 0);
+
+toSort.sort(function(a, b) {
+    var aord = +a.id;
+    var bord = +b.id;
+    // two elements never have the same ID hence this is sufficient:
+    return (aord > bord) ? 1 : -1;
+});
+
+var parent = document.getElementById('container');
+parent.innerHTML = "";
+
+for(var i = 0, l = toSort.length; i < l; i++) {
+    parent.appendChild(toSort[i]);
+}
+    }  
+
+  </script>
+</html>
